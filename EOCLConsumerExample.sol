@@ -6,10 +6,6 @@ interface IEOFeedAdapter {
     function decimals() external view returns (uint8);
     function description() external view returns (string memory);
     function version() external view returns (uint256);
-
-    // getRoundData and latestRoundData both raise "No data present"
-    // if they do not have data to report, instead of returning unset values
-    // which could be misinterpreted as actual reported values.
     function getRoundData(uint80 _roundId)
         external
         view
@@ -21,14 +17,14 @@ interface IEOFeedAdapter {
         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);
 }
 
-
 contract EOCLConsumerExample {
     IEOFeedAdapter public _feedAdapter;
-     /**
+    /**
      * Network: Holesky
      * EOFeedAdapter: 0xDD8387185C9e0a173702fc4a3285FA576141A9cd
-     * Feed Symbol: BTC 
+     * Feed Symbol: BTC
      */
+
     constructor() {
         _feedAdapter = IEOFeedAdapter(0xDD8387185C9e0a173702fc4a3285FA576141A9cd);
     }
@@ -36,10 +32,10 @@ contract EOCLConsumerExample {
     function getPrice() external view returns (int256 answer) {
         (, answer,,,) = _feedAdapter.latestRoundData();
     }
-    
+
     function usePrice() external {
-        int256 answer = this.getPrice();  
-        // Do something 
+        int256 answer = this.getPrice();
+        // Do something
         // .............
     }
 }
