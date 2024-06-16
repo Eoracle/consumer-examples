@@ -38,7 +38,7 @@ contract EOCLConsumerExample {
     }
     
     function usePrice() external {
-        int256 answer = getPrice();  
+        int256 answer = this.getPrice();  
         // Do something 
         // .............
     }
